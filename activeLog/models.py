@@ -4,9 +4,11 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 import pytz
 TIMEZONES = tuple(zip(pytz.all_timezones, pytz.all_timezones))    
+#model to store activty periods
 class activity_periods(models.Model):
     start_time =models.DateTimeField()
     end_time = models.DateTimeField()
+#model to store time zone and activty periods as ManytoMany
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     timezone = models.CharField(max_length=32, choices=TIMEZONES, default='UTC')

@@ -14,8 +14,7 @@ def login(request):
             return render(request,'index.html')
         else:   
             messages.error(request, 'Error wrong username/password') 
-    return render(request, 'login.html') 
- 
+    return render(request, 'login.html')  
 def logout(request):
     auth.logout(request)
     return render(request,'logout.html')
@@ -42,6 +41,7 @@ def home(request):
     return render(request,'index.html')
 from django.http import JsonResponse
 
+#This api for genrating the json
 def gen_jason(request):
     users = User.objects.all()
     data = {"ok":True,"members":[]}
@@ -51,7 +51,7 @@ def gen_jason(request):
         pdata = {}
         if ap:
             pdata["id"] = str(user.id)
-            pdata["real_name"] = (user.first_name +" " + user.last_name).strip()
+            pdata["real_name"] = ((user.first_name if user.first_name else "admin") +" " + user.last_name).strip()
             pdata["tz"]= profile.timezone
             pdata["activity_periods"]=[]
             for i in ap: 
