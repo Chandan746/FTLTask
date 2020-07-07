@@ -1,1 +1,1 @@
-web: gunicorn mainrun:app
+web: gunicorn assignproject.wsgi --log-file -
